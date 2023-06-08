@@ -1,0 +1,55 @@
+package SelasForceTask;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class deletTask {
+	public static void main(String[] args) throws InterruptedException {
+		ChromeOptions option=new ChromeOptions();
+		//Notification block;
+		option.addArguments("--disable-notifications");
+		
+		//Lunch ChromeDriver;
+		ChromeDriver driver=new ChromeDriver(option);
+		driver.get(" https://login.salesforce.com/");
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+		driver.manage().window().maximize();
+		
+		//login Functionality;
+		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+		driver.findElement(By.id("password")).sendKeys("Leaf@1234");
+		driver.findElement(By.id("Login")).click();
+		
+		//click on Global;
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+		
+		//Click view all;
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[text()='View All']")).click();
+		
+		//type new Task;
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//input[@class='slds-input']")).sendKeys("Task",Keys.ENTER);
+		
+		//Click Task;
+		driver.findElement(By.xpath("//P[@class='slds-truncate']")).click();
+		
+		//Click BootCamp;
+		driver.findElement(By.xpath("//div[@class='slds-grid slds-wrap']/following::span")).click();
+		
+		//Click Delete Filed;
+		driver.findElement(By.xpath("(//div[@class='uiPopupTrigger'])[2]")).click();
+		
+		//Delete button;
+		
+		driver.findElement(By.xpath("(//li[@class='uiMenuItem']/following::a)[10]")).click();
+		
+		
+		
+		
+}}

@@ -1,0 +1,54 @@
+package SalesCreatAccount;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class creatAccount {
+	public static void main(String[] args) throws InterruptedException {
+		ChromeDriver driver=new ChromeDriver();
+		
+		driver.get(" https://login.salesforce.com/");
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+		driver.manage().window().maximize();
+		
+		//login Functionality;
+		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+		driver.findElement(By.id("password")).sendKeys("Leaf@1234");
+		driver.findElement(By.id("Login")).click();
+		
+		//toggle button click;
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+		
+		//click View All;
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[text()='View All']")).click();
+		
+		//selas selected;
+		driver.findElement(By.xpath("(//p[@class='slds-truncate'])[2]")).click();
+		
+		//Select DroDwon filed;
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("(//a[@class='slds-button slds-button_reset'])[7]")).click();
+		driver.findElement(By.xpath("//one-app-nav-bar-menu-item[@class='slds-dropdown__item']")).click();
+		
+		
+		//Enter your name;
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//input[@class='slds-input']")).sendKeys("srikanth");
+		//click save button;
+        driver.findElement(By.xpath("//button[@class='slds-button slds-button_brand']")).click();
+		
+		
+	
+		
+		
+		
+		
+		
+		
+	}
+
+}

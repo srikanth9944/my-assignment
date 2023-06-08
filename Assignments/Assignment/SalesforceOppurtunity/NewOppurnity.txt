@@ -1,0 +1,63 @@
+package selasforceOpportunities;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class NewOppurtunity {
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+		ChromeOptions option=new ChromeOptions();
+		option.addArguments("--disable-notifications");
+		ChromeDriver driver=new ChromeDriver(option);
+		driver.get("https://login.salesforce.com/");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+		
+		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+		driver.findElement(By.id("password")).sendKeys("Leaf@1234");
+		driver.findElement(By.id("Login")).click();
+		
+		driver.findElement(By.className("slds-icon-waffle")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[text()='View All']")).click();
+		driver.findElement(By.xpath("//p[text()='Sales']")).click();
+		
+		Thread.sleep(2000);
+		WebElement findElement = driver.findElement(By.xpath("//span[text()='Opportunities']"));
+		JavascriptExecutor je=(JavascriptExecutor) driver;
+		je.executeScript("arguments[0].click();",findElement);
+		
+		driver.findElement(By.xpath("//div[text()='New']")).click();
+		
+		WebElement findElement2 = driver.findElement(By.xpath("//input[@name='Name']"));
+		je.executeScript("arguments[0].click();",findElement2);
+		findElement2.sendKeys("Salesforce Automation by srikanth");
+		
+		driver.findElement(By.xpath("//input[@name='CloseDate']")).click();
+		
+		//today click;
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[text()='Today']")).click();
+		
+		//click None;
+		driver.findElement(By.xpath("//span[text()='--None--']")).click();
+		
+		//click Analysis;
+		driver.findElement(By.xpath("//span[@title='Needs Analysis']")).click();
+		
+		//Save Click Button;
+		driver.findElement(By.xpath("//button[text()='Save']")).click();
+		
+		//verifying 
+		
+		System.out.println(driver.findElement(By.xpath("//span[@class='toastMessage slds-text-heading--small forceActionsText']")).getText());
+		
+	}
+
+
+}

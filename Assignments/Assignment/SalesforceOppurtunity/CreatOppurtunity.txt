@@ -1,0 +1,63 @@
+package selasforceOpportunities;
+
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class CreatOppurtunityName {
+	public static void main(String[] args) throws InterruptedException {
+		ChromeDriver driver=new ChromeDriver();
+		driver.get(" https://login.salesforce.com/");
+		driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+		driver.manage().window().maximize();
+		
+		//login Functionality;
+		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+		driver.findElement(By.id("password")).sendKeys("Leaf@1234");
+		driver.findElement(By.id("Login")).click();
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//button[text()='View All']")).click();
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//input[@class='slds-input']")).sendKeys("op",Keys.ENTER);
+		driver.findElement(By.xpath("(//p[@class='slds-truncate'])[3]")).click();
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//div[text()='New']")).click();
+		
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("(//input[@class='slds-input'])[3]")).sendKeys("06/06/2023",Keys.ENTER);
+		driver.findElement(By.xpath("(//input[@class='slds-input'])[4]")).sendKeys("Srikanth");
+		
+		
+		//Exepection Handling
+		Thread.sleep(3000);
+		
+		WebElement dropDwon = driver.findElement(By.xpath("//button[@class='slds-combobox__input slds-input_faux slds-combobox__input-value']"));
+		dropDwon.click();
+		driver.findElement(By.xpath("(//span[@class='slds-media__body'])[4]")).click();
+		
+		//Click Save Button
+		driver.findElement(By.xpath("//button[text()='Save']")).click();
+		
+		//Oppurtunity Name verifying;
+		String text = driver.findElement(By.xpath("//lightning-formatted-text[text()='Srikanth']")).getText();
+		String text1="Srikanth";
+		if (text.equals(text1)) {
+			System.out.println("oppurtunity Name Srikanth is Correct");
+		}	else {
+			System.out.println("oppurtunity Name is not Correct");
+		}
+		
+		//close window....
+		driver.quit();
+	}
+
+
+}

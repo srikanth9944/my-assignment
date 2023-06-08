@@ -1,0 +1,47 @@
+package DashBoard;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DeleteDashBoard {
+	public static void main(String[] args) throws InterruptedException {
+		ChromeDriver driver=new ChromeDriver();
+		driver.get("https://login.salesforce.com/");
+		driver.manage().window().maximize();
+		
+		//login functionality
+		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+		driver.findElement(By.id("password")).sendKeys("Leaf@1234");
+		driver.findElement(By.id("Login")).click();
+		
+		//click toggle button;
+		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+		
+		//click view all button;
+	    driver.findElement(By.xpath("//button[text()='View All']")).click();
+	    
+	    //click Dashboard;
+	    driver.findElement(By.xpath("//p[text()='Dashboards']/ancestor::li")).click();
+	    
+	    //Enter your name;
+	    driver.findElement(By.xpath("//input[@class='search-text-field slds-input input uiInput uiInputText uiInput--default uiInput--input']")).sendKeys("Srikanth",Keys.ENTER);
+	    
+	    //click  dropdwon icon and select delete;
+	    Thread.sleep(2000);
+	    WebElement findElement = driver.findElement(By.xpath("//span[@class='highlightSearchText']"));
+	    driver.executeScript("arguments[0].click();", findElement);
+	    
+	    WebElement findElement1 = driver.findElement(By.xpath("//iframe[@title='dashboard']"));
+	    driver.switchTo().frame(findElement1);
+	    driver.findElement(By.xpath("//button[@class='slds-button slds-button_icon-border-filled ignore-click-mJ-Am8AMeu menuTrigger']")).click();
+	  
+	    //click on Delete option;
+	    driver.findElement(By.xpath("//span[text()='Delete']")).click();
+	   
+	    //click delete button;
+	    driver.findElement(By.xpath("//button[text()='Delete']")).click();
+	}
+
+}

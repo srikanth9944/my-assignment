@@ -1,0 +1,47 @@
+package DashBoard;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class CreateNewDashboard {
+	public static void main(String[] args) {
+	       ChromeDriver driver=new ChromeDriver();
+	       driver.get("https://login.salesforce.com/");
+			driver.manage().window().maximize();
+			
+			//login functionality;
+			driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+			driver.findElement(By.id("password")).sendKeys("Leaf@1234");
+			driver.findElement(By.id("Login")).click();
+			
+			//click on the toggle menu button;
+			driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+			
+			//click view all;
+		    driver.findElement(By.xpath("//button[text()='View All']")).click();
+		    driver.findElement(By.xpath("//p[text()='Dashboards']/ancestor::li")).click();
+		    
+		    //click New DashBoard
+		    driver.findElement(By.xpath("//a[@title='New Dashboard']")).click();
+		   
+			WebElement frame =driver.findElement(By.xpath("//div[@class='dashboardContainer']//iframe"));
+		    driver.switchTo().frame(frame);
+		    driver.findElement(By.id("dashboardNameInput")).sendKeys("Salesforce Automation by Srikanth");
+		    
+		    //click sumbit button;
+		    driver.findElement(By.id("submitBtn")).click();
+		    driver.switchTo().defaultContent();
+		    WebElement findElement = driver.findElement(By.xpath("//iframe[@title='dashboard']"));
+		    driver.switchTo().frame(findElement);
+		    
+		    //click save button;
+		    driver.findElement(By.xpath("//button[text()='Save']")).click();
+		    
+		    //vrify Dashboard name;
+		    String title = driver.getTitle();
+		    System.out.println(title);
+		    
+		   
+		}
+}

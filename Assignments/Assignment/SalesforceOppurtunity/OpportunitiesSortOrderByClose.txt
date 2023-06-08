@@ -1,0 +1,53 @@
+package selasforceOpportunities;
+
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class selasforceOpportunitiesSortOrderByClose {
+	public static void main(String[] args) throws InterruptedException {
+		
+	
+	  ChromeDriver driver=new ChromeDriver();
+			//EdgeBrowser driver=new EdgeBrowser();
+			driver.get(" https://login.salesforce.com/");
+			driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+			driver.manage().window().maximize();
+			
+			//login Functionality;
+			driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+			driver.findElement(By.id("password")).sendKeys("Leaf@1234");
+			driver.findElement(By.id("Login")).click();
+			
+			//Click on Toggle Button;
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+			
+			//Click on View All Button;
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("//button[text()='View All']")).click();
+			
+			//Click on Sales;
+			driver.findElement(By.xpath("(//P[@class='slds-truncate'])[2]")).click();
+			
+			//Click On oppurtunities;
+			//WebDriverWait wait=new WebDriverWait(driver,30);
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("(//a[@class='slds-context-bar__label-action dndItem'])[2]")).click();
+			
+			//Date displayed in ascending order;
+			List<WebElement> elements = driver.findElements(By.xpath("//span[@class='uiOutputDate']"));
+			for(WebElement eachElement:elements) {
+				System.out.println(eachElement);
+			}
+			
+			//
+			
+			
+			
+			
+}}

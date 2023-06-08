@@ -1,0 +1,76 @@
+package DashBoard;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class EditeDashBoard {
+
+	public static void main(String[] args) throws InterruptedException {
+		ChromeDriver driver=new ChromeDriver();
+		driver.get("https://login.salesforce.com/");
+		driver.manage().window().maximize();
+		
+		//login Salesforce
+		driver.findElement(By.id("username")).sendKeys("hari.radhakrishnan@qeagle.com");
+		driver.findElement(By.id("password")).sendKeys("Leaf@1234");
+		driver.findElement(By.id("Login")).click();
+		
+		//click toggle menu button
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//div[@class='slds-icon-waffle']")).click();
+		
+		//click view All button
+	    driver.findElement(By.xpath("//button[text()='View All']")).click();
+	    
+	    //click on DashBoard ;
+	    driver.findElement(By.xpath("//p[text()='Dashboards']/ancestor::li")).click();
+	    
+	    //Enter your name ;
+	    driver.findElement(By.xpath("//input[@class='search-text-field slds-input input uiInput uiInputText uiInput--default uiInput--input']")).sendKeys("Srikanth",Keys.ENTER);
+	   
+	    //click dropDwon Icon;
+	    Thread.sleep(3000);
+	    WebElement findElement = driver.findElement(By.xpath("//span[@class='highlightSearchText']"));
+	    driver.executeScript("arguments[0].click();", findElement);
+	    
+	    //select edit;
+	    WebElement findElement1 = driver.findElement(By.xpath("//iframe[@title='dashboard']"));
+	    driver.switchTo().frame(findElement1);
+	    driver.findElement(By.xpath("//button[@class='slds-button slds-button_neutral edit']")).click();
+	    driver.switchTo().defaultContent();
+	    
+	    //click dashBoard;
+	    WebElement findElement2 = driver.findElement(By.xpath("//iframe[@title='dashboard']"));
+	    driver.switchTo().frame(findElement2);
+	    
+	    //click on the edite Dashboard properties;
+	    driver.findElement(By.xpath("//button[@title='Edit Dashboard Properties']")).click();
+	    driver.findElement(By.id("dashboardDescriptionInput")).sendKeys("salesforce");
+	    driver.findElement(By.id("submitBtn")).click();
+	    String title = driver.getTitle();  
+	    System.out.println(title);
+	    
+	    //click done button;
+	    driver.findElement(By.xpath("//button[text()='Done']")).click();
+	    driver.switchTo().defaultContent();
+	    
+	    WebElement findElement3 = driver.findElement(By.xpath("//iframe[@title='dashboard']"));
+	    driver.switchTo().frame(findElement3);
+	    
+	    //verifying the description
+	    driver.findElement(By.xpath("//button[@class='slds-button slds-button_brand modalBtn2']")).click();
+	    String title1 = driver.getTitle();
+	    System.out.println(title1);
+	    if (title.equals(title1)) {
+	    	System.out.println("The dashboard is Edited");
+	    	}
+	    else {
+	    	System.out.println("The dashboard is  not Edited");
+
+	}
+
+	}
+
+}
